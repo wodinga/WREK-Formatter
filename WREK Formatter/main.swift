@@ -9,6 +9,10 @@
 import Foundation
 import AVFoundation
 
+
+/// This is the code that splits mixes into smaller chunks
+
+let audioLength = 59 //Length in minutes
 let manager = FileManager()
 let desktopPath = NSSearchPathForDirectoriesInDomains(.desktopDirectory, .userDomainMask, true)[0]
 
@@ -33,7 +37,7 @@ let fileLength = CMTime(value: asset.duration.value, timescale: asset.duration.t
 print( "\(fileLength.seconds/60) minutes" )
 
 var start: CMTime = CMTime(seconds: 0, preferredTimescale: fileLength.timescale)
-var duration: CMTime = CMTime(seconds: (fileLength.seconds/60 >= 60) ? 59 * 60 + 59 : fileLength.seconds, preferredTimescale: fileLength.timescale)
+var duration: CMTime = CMTime(seconds: (fileLength.seconds/60 >= 60) ? Double(audioLength * 60 + 59) : fileLength.seconds, preferredTimescale: fileLength.timescale)
 print(start)
 print(duration)
 let group = DispatchGroup()
